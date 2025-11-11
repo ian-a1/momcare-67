@@ -1,0 +1,326 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.container {
+    max-width: 100%;
+    background: white;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #FF4D8F, #FABAC0);
+    color: white;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.main-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 5px 0 0;
+    opacity: 0.95;
+}
+
+/* Image */
+.hero-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+    border-radius: 10px;
+    background: #f8f9fa;
+}
+
+/* Meta Info */
+.meta-info {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.meta-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.meta-label {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.meta-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #FF4D8F;
+}
+
+/* Content */
+.content {
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #FF4D8F;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-icon {
+    font-size: 24px;
+}
+
+/* Description */
+.description {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #FF4D8F;
+}
+
+/* Benefits and Safety Lists */
+.benefits-list, .safety-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Using recipe's "tips-list" style for benefits */
+.benefits-list li {
+    padding: 12px 15px 12px 45px;
+    margin-bottom: 10px;
+    background: #fff9e6;
+    border-left: 4px solid #ffc107;
+    border-radius: 5px;
+    position: relative;
+    font-weight: 400;
+}
+
+.benefits-list li:before {
+    content: "💡";
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 20px;
+}
+
+/* Using recipe's "safety-list" style */
+.safety-list li {
+    padding: 12px 15px 12px 45px;
+    margin-bottom: 10px;
+    background: #fff9e6;
+    border-left: 4px solid #ffc107;
+    border-radius: 5px;
+    position: relative;
+    font-weight: 400;
+}
+
+.safety-list li:before {
+    content: "💡";
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 20px;
+}
+
+/* Instructions List (for main content) */
+.instructions-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: step-counter;
+}
+
+.instructions-list li {
+    position: relative;
+    padding: 15px 15px 15px 15px;
+    margin-bottom: 15px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    line-height: 1.5;
+    font-weight: 400;
+    counter-increment: step-counter;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+/* Using checkmark like recipes, instead of number */
+.instructions-list li::before {
+    content: "✓";
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #FF4D8F, #FABAC0);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+.instructions-list li > span {
+    display: block;
+    flex: 1;
+}
+
+/* For simple list items */
+.simple-list {
+    list-style: none;
+    padding: 0;
+}
+.simple-list li {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.simple-list li:before {
+    content: "✓";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #FF4D8F;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+
+/* Nutrition Grid (for meta info) */
+.nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.nutrition-item {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.nutrition-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #FF4D8F;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.nutrition-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Superscript refs */
+a sup {
+    vertical-align: super;
+    font-size: 0.75em;
+    color: #FF4D8F;
+}
+
+a {
+    color: #FF4D8F;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Video Embed */
+.video-embed {
+    width: 100%;
+    height: 315px;
+    margin: 1rem auto;
+    border-radius: 12px;
+    border: none;
+}
+
+/* Responsive Design */
+@media (max-width: 375px) {
+    .main-title { font-size: 20px; }
+    .subtitle { font-size: 14px; }
+    .meta-info { padding: 15px; }
+    .meta-item { min-width: 70px; }
+    .meta-value { font-size: 13px; }
+    .meta-label { font-size: 10px; }
+    .content { padding: 15px; }
+    .section-title { font-size: 18px; }
+    .video-embed { height: 200px; }
+    .instructions-list li { gap: 10px; }
+    .instructions-list li::before { width: 32px; height: 32px; font-size: 14px; }
+}
+
+/* Print Styles */
+@media print {
+    .header {
+        position: static;
+        background: white;
+        color: #333;
+        border-bottom: 2px solid #FF4D8F;
+    }
+    .hero-img { page-break-after: avoid; }
+    .section { page-break-inside: avoid; }
+}
