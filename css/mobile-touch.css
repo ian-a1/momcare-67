@@ -1,0 +1,398 @@
+/* ================================================
+   MOBILE TOUCH IMPROVEMENTS
+   Enhanced touch interactions for better mobile UX
+   ================================================ */
+
+/* ===== 1. GLOBAL TOUCH OPTIMIZATIONS ===== */
+
+/* Remove touch delays and improve responsiveness */
+* {
+  -webkit-tap-highlight-color: rgba(255, 135, 171, 0.2);
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+  /* Prevent double-tap zoom on buttons and interactive elements */
+}
+
+/* Allow text selection where needed */
+input,
+textarea,
+.post-content,
+.reply-text,
+.profile-field-value,
+p {
+  -webkit-touch-callout: default;
+  touch-action: auto;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Smooth scrolling for touch devices */
+.tab-content,
+.modal-content,
+.library-books,
+.forum-posts,
+.profile-page-content {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* ===== 2. BUTTON TOUCH IMPROVEMENTS ===== */
+
+/* Minimum touch target size (44x44px recommended by Apple/Google) */
+button,
+.btn,
+.btn-small,
+.btn-save,
+.btn-cancel,
+.btn-agree,
+.btn-decline,
+.tab-item,
+.emergency-button,
+.form-btn,
+.icon-button,
+.back-button,
+.edit-button,
+a[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  cursor: pointer;
+  position: relative;
+  /* Add touch feedback */
+  transition: transform 0.1s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Active touch feedback - scale down slightly */
+button:active,
+.btn:active,
+.btn-small:active,
+.btn-save:active,
+.btn-cancel:active,
+.form-btn:active,
+.emergency-button:active,
+.tab-item:active {
+  transform: scale(0.97);
+}
+
+/* Better spacing between touch targets */
+.action-buttons button {
+  margin: 0 6px;
+}
+
+.modal-actions button {
+  margin: 0 8px;
+}
+
+/* ===== 3. FORM INPUT IMPROVEMENTS ===== */
+
+/* Larger touch-friendly inputs */
+input,
+textarea,
+select,
+.form-input {
+  min-height: 48px;
+  font-size: 16px; /* Prevents iOS zoom on focus */
+  padding: 12px 16px;
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Focus states for better feedback */
+input:focus,
+textarea:focus,
+select:focus,
+.form-input:focus {
+  outline: none;
+  border-color: #FF4D8F;
+  box-shadow: 0 0 0 3px rgba(255, 77, 143, 0.1);
+}
+
+/* ===== 4. CARD & LIST ITEM IMPROVEMENTS ===== */
+
+/* Better touch feedback for cards */
+.appointment-card,
+.book-card,
+.post-card,
+.reply-card,
+.contact-card,
+.milestone-item {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+.appointment-card:active,
+.book-card:active,
+.post-card:active,
+.contact-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== 5. TAB BAR IMPROVEMENTS ===== */
+
+.tab-bar {
+  padding: 8px 0;
+  min-height: 65px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.tab-item {
+  padding: 10px 8px;
+  border-radius: 12px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.tab-item:active {
+  background-color: rgba(255, 77, 143, 0.1);
+  transform: scale(0.95);
+}
+
+/* ===== 6. MODAL IMPROVEMENTS ===== */
+
+/* Prevent background scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Better modal touch interactions */
+.modal {
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-overlay {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+}
+
+.modal-content {
+  max-height: 85vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Close button touch target */
+.modal-close {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 12px;
+}
+
+/* ===== 7. SWIPE & GESTURE HINTS ===== */
+
+/* Visual hint for swipeable content */
+.swipeable {
+  position: relative;
+}
+
+.swipeable::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+/* ===== 8. LOADING & DISABLED STATES ===== */
+
+/* Better disabled state feedback */
+button:disabled,
+.btn:disabled,
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+button:disabled:active,
+.btn:disabled:active {
+  transform: none !important;
+}
+
+/* Loading state */
+.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ===== 9. DROPDOWN & SELECT IMPROVEMENTS ===== */
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+/* ===== 10. RIPPLE EFFECT (Optional Enhancement) ===== */
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+}
+
+.ripple:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+/* ===== 11. PULL-TO-REFRESH HINT ===== */
+
+.pull-refresh-container {
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== 12. SAFE AREA INSETS (iPhone X+) ===== */
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  .phone-container {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .tab-bar {
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+}
+
+/* ===== 13. HAPTIC FEEDBACK HINT ===== */
+
+/* Add this class to elements that should trigger haptic feedback */
+.haptic-feedback:active {
+  /* JavaScript will handle actual haptic feedback */
+  animation: subtle-shake 0.1s ease;
+}
+
+@keyframes subtle-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+
+/* ===== 14. SPECIFIC COMPONENT IMPROVEMENTS ===== */
+
+/* Emergency SOS Button - Larger, more prominent */
+.emergency-button {
+  min-height: 60px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(255, 77, 143, 0.3);
+}
+
+.emergency-button:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(255, 77, 143, 0.4);
+}
+
+/* Forum post interactions */
+.post-actions button,
+.reply-actions button {
+  min-height: 36px;
+  min-width: 36px;
+  padding: 8px 12px;
+  margin: 0 4px;
+}
+
+/* Doctor selection cards */
+.doctor-card {
+  padding: 16px;
+  min-height: 80px;
+  transition: all 0.2s ease;
+}
+
+.doctor-card:active {
+  transform: scale(0.98);
+  background-color: #f8f9fa;
+}
+
+/* Date/Time pickers */
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"] {
+  min-height: 48px;
+  font-size: 16px;
+  padding: 12px 16px;
+}
+
+/* ===== 15. REDUCE MOTION (Accessibility) ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== 16. SMALL SCREEN ADJUSTMENTS ===== */
+
+@media (max-width: 375px) {
+  /* Smaller devices need even more touch-friendly spacing */
+  button,
+  .btn {
+    min-height: 48px;
+    font-size: 15px;
+  }
+  
+  input,
+  textarea,
+  select {
+    min-height: 50px;
+    font-size: 16px;
+  }
+}
+
+/* ===== 17. LANDSCAPE MODE IMPROVEMENTS ===== */
+
+@media (orientation: landscape) and (max-height: 500px) {
+  /* Reduce padding in landscape to maximize content */
+  .modal-content {
+    max-height: 90vh;
+    padding: 16px;
+  }
+  
+  .header {
+    padding: 15px 20px;
+  }
+  
+  button,
+  .btn {
+    min-height: 40px;
+  }
+}

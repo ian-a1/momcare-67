@@ -1,0 +1,341 @@
+/* Mental Health Resource Detail Page Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Recipe Container (keeping same class names for consistency) */
+.recipe-container {
+  max-width: 100%;
+  background: white;
+  min-height: 100vh;
+}
+
+/* Recipe Header */
+.recipe-header {
+  background: linear-gradient(135deg, #6B46C1, #9F7AEA);
+  color: white;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.recipe-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.recipe-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 5px 0 0 0;
+  opacity: 0.95;
+}
+
+/* Resource Image */
+.recipe-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  display: block;
+  background: #f8f9fa;
+}
+
+/* Resource Meta Info */
+.recipe-meta {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.meta-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.meta-label {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.meta-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6B46C1;
+}
+
+/* Resource Content */
+.recipe-content {
+  padding: 20px;
+}
+
+.recipe-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #6B46C1;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-icon {
+  font-size: 24px;
+}
+
+/* Description */
+.recipe-description {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.8;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #6B46C1;
+}
+
+/* Ingredients List (repurposed for "What You Need") */
+.ingredients-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ingredients-list li {
+  padding: 12px 15px;
+  margin-bottom: 8px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ingredients-list li:before {
+  content: "✓";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: #6B46C1;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 24px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Instructions List (repurposed for step-by-step guides) */
+.instructions-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: step-counter;
+}
+
+.instructions-list li {
+  padding: 15px 15px 15px 60px;
+  margin-bottom: 15px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  position: relative;
+  line-height: 1.8;
+  counter-increment: step-counter;
+}
+
+.instructions-list li:before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #6B46C1, #9F7AEA);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.instructions-list li strong {
+  color: #6B46C1;
+}
+
+/* Nutrition Grid (repurposed for frequency/timing info) */
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.nutrition-item {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.nutrition-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6B46C1;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.nutrition-label {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+/* Tips Section */
+.tips-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tips-list li {
+  padding: 12px 15px 12px 45px;
+  margin-bottom: 10px;
+  background: #f0f4ff;
+  border-left: 4px solid #6B46C1;
+  border-radius: 5px;
+  position: relative;
+  line-height: 1.8;
+}
+
+.tips-list li:before {
+  content: "💡";
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  font-size: 20px;
+}
+
+.tips-list li strong {
+  color: #6B46C1;
+  font-weight: 600;
+}
+
+/* Safety Reminders - special styling */
+.recipe-section:has(.tips-list) .section-icon:contains("⚠️") ~ .tips-list li {
+  background: #fff9e6;
+  border-left-color: #ffc107;
+}
+
+/* Responsive Design */
+@media (max-width: 375px) {
+  .recipe-title {
+    font-size: 20px;
+  }
+
+  .recipe-subtitle {
+    font-size: 14px;
+  }
+
+  .recipe-meta {
+    padding: 15px;
+  }
+
+  .meta-item {
+    min-width: 70px;
+  }
+
+  .meta-value {
+    font-size: 13px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+  }
+
+  .nutrition-value {
+    font-size: 16px;
+  }
+
+  .nutrition-label {
+    font-size: 11px;
+  }
+
+  .recipe-content {
+    padding: 15px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+}
+
+/* Link Styles */
+a {
+  color: #6B46C1;
+  text-decoration: underline;
+  word-wrap: break-word;
+}
+
+a:hover {
+  color: #9F7AEA;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #553C9A;
+}
+
+/* Print Styles */
+@media print {
+  .recipe-header {
+    position: static;
+    background: white;
+    color: #333;
+    border-bottom: 2px solid #6B46C1;
+  }
+
+  .recipe-image {
+    page-break-after: avoid;
+  }
+
+  .recipe-section {
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: #6B46C1;
+    text-decoration: underline;
+  }
+}

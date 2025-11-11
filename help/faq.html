@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MomCare Guide FAQs</title>
+  <style>
+    :root {
+      --primary: #d5296e;
+      --light-pink: #f97ea7;
+      --soft-pink: #F8BBD0;
+      --pale-pink: #FCE4EC;
+      --off-white: #FFF8F8;
+      --text: #2E2E2E;
+      --text-light: #555;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f9f9fb, #FFF8F8);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: var(--off-white);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(194, 24, 91, 0.08);
+      border: 1px solid #fce4ec;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 32px;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .faq-item {
+      margin-bottom: 14px;
+      border-bottom: 1px dashed #f8bbd0;
+    }
+
+    .faq-question {
+      background: var(--light-pink);
+      color: white;
+      padding: 16px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(240, 98, 146, 0.2);
+    }
+
+    .faq-question:hover {
+      background: #ec407a;
+      transform: translateY(-1px);
+    }
+
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question.active::after {
+      content: '−';
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 20px;
+      background: var(--pale-pink);
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      border-radius: 0 0 10px 10px;
+      margin-top: -8px;
+    }
+
+    .faq-answer.open {
+      max-height: 400px;
+      padding: 18px 20px;
+      border: 1px solid #f8bbd0;
+      border-top: none;
+    }
+
+    .faq-answer b {
+      color: var(--primary);
+    }
+
+    .faq-answer ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .faq-answer li {
+      margin: 6px 0;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #999;
+      font-size: 0.8rem;
+      border-top: 1px dashed #f8bbd0;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>MomCare Guide – Frequently Asked Questions</h1>
+
+  <!-- FAQ 1 -->
+  <div class="faq-item">
+    <div class="faq-question">What is MomCare Guide?</div>
+    <div class="faq-answer">
+      <b>MomCare Guide</b> is a free Progressive Web App (PWA) offering verified, culturally relevant pregnancy support for Filipino women 
+      within Sta. Mesa, Manila. It includes a pregnancy milestone tracking, maternal health library, emergency SOS, and community 
+      forum — all accessible and installable from any browser and device type.
+    </div>
+  </div>
+
+  <!-- FAQ 2 -->
+  <div class="faq-item">
+    <div class="faq-question">Is it free and safe to use?</div>
+    <div class="faq-answer">
+      <b>Yes</b>, the app is completely free with no hidden costs. It follows RA 10173 (Data Privacy Act), uses encryption for all personal 
+      data, and never sells user information. Only verified healthcare content is allowed.
+    </div>
+  </div>
+
+  <!-- FAQ 3 -->
+  <div class="faq-item">
+    <div class="faq-question">What devices can run it?</div>
+    <div class="faq-answer">
+      Primarily any <b>mobile</b> or <b>desktop</b> device with a modern browser (Chrome, Safari, etc.) and at least 10 MB of free space. It
+      runs as a Progressive Web App (PWA) — no app store download needed — and works on low-end devices with at least 2 GB of RAM or more.
+    </div>
+  </div>
+
+  <!-- FAQ 4 -->
+  <div class="faq-item">
+    <div class="faq-question">How do I sign up or log in?</div>
+    <div class="faq-answer">
+      <ul>
+        <li>Open <b>MomCare Guide</b></li>
+        <li>Select <b>Sign-Up</b></li>
+        <li>Enter your: Full name, Email, Birthdate, Gender, Address, and Password.</li>
+        <li>To <b>log in</b>, use your email and password.</li>
+        <li>Forgot password? Use the reset link sent to your email.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAQ 5 -->
+  <div class="faq-item">
+    <div class="faq-question">Can I use it without internet?</div>
+    <div class="faq-answer">
+      <ul>
+        <li><b>Yes</b> — install MomCare Guide to be able to use it without internet.</li>
+        <li>Pregnancy tracking and local data will work without internet <i>(except for Emergency SOS)</i>;</li>
+        <li>Forum and any updates will sync once you’re back online.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAQ 6 -->
+  <div class="faq-item">
+    <div class="faq-question">How do I access health information?</div>
+    <div class="faq-answer">
+      Go to the <b>Library</b> section to browse verified maternal health resources inside the app. All content is medically reviewed and 
+      culturally tailored for Filipino use.
+    </div>
+  </div>
+
+  <!-- FAQ 7 -->
+  <div class="faq-item">
+    <div class="faq-question">How does pregnancy tracking work?</div>
+    <div class="faq-answer">
+      <ul>
+        <li>Go to <b>Profile</b> tab.</li>
+        <li>Select <b>Basic Information.</b></li>
+        <li>Find the <b>Estimated Due Date</b> field.</li>
+        <li>Enter your <b>due date</b> to see your current pregnancy progress;</li>
+        <li>Additionally, you can select <b>Don't know your due date? Learn more</b> option below to get more information regarding your 
+            <b>Estimated Due Date.</b></li>
+        <li>Add prenatal appointments with dates and reminders based on your current pregnancy plan.</li>
+        <li>The app sends alerts so you never miss a check-up — all saved locally and synced when online.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAQ 8 -->
+  <div class="faq-item">
+    <div class="faq-question">What is the community forum?</div>
+    <div class="faq-answer">
+      <b>MomCare Guide Community Forum</b> is a moderated space where users can ask questions, share experiences, and support each other. 
+      All posts are reviewed by admins to prevent misinformation and misuse. Report any concerns directly in-app.
+    </div>
+  </div>
+
+  <!-- FAQ 9 -->
+  <div class="faq-item">
+    <div class="faq-question">How does the Emergency SOS work?</div>
+    <div class="faq-answer">
+      <ul>
+        <li>Tap the <b>Emergency SOS</b> button to figure out your current location.</li>
+        <li>MomCare Guide will send a pre-set message regarding your information to your emergency contacts and clinic.</li>
+        <li>Mobile data or Internet access is <b>required</b> to be able to use this feature.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAQ 10 -->
+  <div class="faq-item">
+    <div class="faq-question">Can my partner or family use it?</div>
+    <div class="faq-answer">
+      <b>Yes</b> — Partners can also create accounts to access educational content, community forum, and other relevant features in-app. 
+      MomCare Guide app encourages <b>active family involvement</b> for ensuring maternal health support.
+    </div>
+  </div>
+
+  <!-- FAQ 11 -->
+  <div class="faq-item">
+    <div class="faq-question">How is my data protected and backed up?</div>
+    <div class="faq-answer">
+      <b>Personal data</b> is encrypted and stored securely in the cloud with daily backups. Local data <i>(like <b>library</b>)</i> is
+      cached on your device. Regular syncs ensure your information is up-to-date when online.
+    </div>
+  </div>
+
+  <!-- FAQ 12 -->
+  <div class="faq-item">
+    <div class="faq-question">Who checks the medical accuracy?</div>
+    <div class="faq-answer">
+      All library content is reviewed and approved by <b>licensed healthcare professionals</b> and aligned with Department of Health (DOH) 
+      guidelines in relation to maternal health. Admin moderators ensure ongoing accuracy and cultural relevance.
+    </div>
+  </div>
+
+  <!-- FAQ 13 -->
+  <div class="faq-item">
+    <div class="faq-question">What if I have technical issues?</div>
+    <div class="faq-answer">
+      <ul>
+        <li>Try <b>refreshing</b> the page or <b>clearing cache</b>.</li>
+        <li>For <b>login</b> or <b>sync</b> problems, check your internet and retry.</li>
+        <li>For <b>other issues</b>, contact support via in-app <b>Help & Support</b> section.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAQ 14 -->
+  <div class="faq-item">
+    <div class="faq-question">How is the app different from BabyCenter or What to Expect?</div>
+    <div class="faq-answer">
+      Unlike global apps, <b>MomCare Guide</b> is built specifically for Filipino use, with PWA architecture <i>(MomCare Guide size <= 10 MB; 
+      global apps <= 500 MB)</i>, with unique features like <b>Emergency SOS</b> tied to Philippine protocols.
+    </div>
+  </div>
+
+  <!-- FAQ 15 -->
+  <div class="faq-item">
+    <div class="faq-question">How will the app be improved after launch?</div>
+    <div class="faq-answer">
+      User feedback via surveys and Likert-scale evaluations (per ISO 25010) will guide updates. Future versions may add voice mode, 
+      chatbot support, or integration with other public health centers.
+    </div>
+  </div>
+
+  <p class="footer">
+    MomCare Guide © 2025 | Polytechnic University of the Philippines<br>
+    Capstone Project by Aguilar, Calma, Flores, See
+  </p>
+</div>
+
+<script>
+  const questions = document.querySelectorAll('.faq-question');
+  questions.forEach(q => {
+    q.addEventListener('click', () => {
+      const answer = q.nextElementSibling;
+      const isOpen = answer.classList.contains('open');
+
+      // Close all others
+      document.querySelectorAll('.faq-answer').forEach(a => {
+        a.classList.remove('open');
+        a.previousElementSibling.classList.remove('active');
+      });
+
+      // Toggle current
+      if (!isOpen) {
+        answer.classList.add('open');
+        q.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

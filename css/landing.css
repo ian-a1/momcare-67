@@ -1,0 +1,729 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Phone Container - Responsive */
+.phone-container {
+  width: 100%;
+  max-width: 550px;
+  min-height: 667px;
+  background: #f8f9fa;
+  border-radius: 25px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+/* Landing Container */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 667px;
+  background: linear-gradient(135deg, #ffeef0 0%, #fff5f7 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Auth Container */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 667px;
+  background: linear-gradient(135deg, #ffeef0 0%, #fff5f7 100%);
+  position: relative;
+  padding: 20px;
+  overflow-y: auto;
+  justify-content: center;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  font-size: 16px;
+  color: #666;
+}
+
+.auth-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+}
+
+/* App Logo */
+.app-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.app-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.logo-icon {
+  filter: drop-shadow(0 4px 8px rgba(255, 107, 107, 0.3));
+  animation: float 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 50%;
+  padding: 5px;
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Landing Header */
+.landing-header {
+  padding: 40px 20px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Landing Content */
+.landing-content {
+  flex: 1;
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* Welcome Section */
+.welcome-section {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.welcome-title {
+  font-size: 30px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.welcome-text {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.auth-btn {
+  padding: 16px 24px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.auth-btn:hover::before {
+  left: 100%;
+}
+
+.auth-btn.primary {
+  background: linear-gradient(135deg, #ff6b9d, #ff8e8e);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.auth-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+}
+
+.auth-btn.secondary {
+  background: transparent;
+  color: #ff6b9d;
+  border: 2px solid #ff6b9d;
+  box-shadow: 0 2px 10px rgba(255, 107, 107, 0.2);
+}
+
+.auth-btn.secondary:hover {
+  background: #ff6b9d;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  /* slightly smaller circular icon outside the input */
+  position: relative;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  margin-right: 10px;
+  background: linear-gradient(135deg, #ff6b9d, #ff8e8e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.input-icon::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+
+.form-input,
+select {
+  width: 100%;
+  /* when icon sits outside, use a normal left padding */
+  padding: 15px 50px 15px 18px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 16px;
+  background: white;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+  cursor: pointer;
+  padding-right: 50px;
+}
+
+.form-input:not([type="password"]) {
+  padding-right: 15px;
+}
+
+.form-input:focus,
+select:focus {
+  outline: none;
+  border-color: #ff6b9d;
+  box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+}
+
+.form-input::placeholder {
+  color: #777;
+  opacity: 1; /* ensure placeholder is visible */
+}
+
+/* Date inputs styling */
+.date-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.date-inputs .input-wrapper {
+  flex: 1;
+}
+
+.date-inputs .input-wrapper:nth-child(1) {
+  margin-right: 45px;
+}
+
+.date-inputs .input-wrapper:nth-child(2) {
+  margin-right: 5px;
+}
+
+.date-inputs select {
+  padding: 15px 40px 15px 15px;
+  background: white;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.3s ease;
+}
+
+.date-inputs .form-input,
+.date-inputs input[type="number"] {
+  padding: 15px !important;
+  background: white !important;
+  border: 2px solid #e0e0e0 !important;
+  border-radius: 25px !important;
+  font-size: 16px !important;
+  transition: all 0.3s ease !important;
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.date-inputs select:focus,
+.date-inputs .form-input:focus,
+.date-inputs input[type="number"]:focus {
+  outline: none !important;
+  border-color: #ff6b9d !important;
+  box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1) !important;
+}
+
+.date-inputs .form-input::placeholder,
+.date-inputs input[type="number"]::placeholder {
+  color: #999;
+  text-align: center;
+}
+
+.date-inputs .input-icon {
+  display: none;
+}
+
+/* Password toggle button */
+.password-toggle {
+  position: absolute !important;
+  right: 15px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px;
+  z-index: 10 !important;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  color: #666;
+  margin: 0 !important;
+}
+
+.password-toggle:hover {
+  background: rgba(255, 107, 157, 0.1) !important;
+}
+
+/* Form Button */
+.form-btn {
+  width: 100%;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.form-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.form-btn:hover::before {
+  left: 100%;
+}
+
+.form-btn.primary {
+  background: linear-gradient(135deg, #ff6b9d, #ff8e8e);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.form-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+}
+
+/* Links */
+.form-link {
+  color: #ff6b9d;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+  margin: 20px 0;
+}
+
+.form-link:hover {
+  text-decoration: underline;
+}
+
+/* Back button */
+.back-btn {
+  position: absolute;
+  /* default (mobile-first) placement */
+  top: 8px;
+  left: 12px;
+  background: rgba(255,255,255,0.6);
+  border: none;
+  color: #ff6b9d;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease, transform 0.12s ease;
+  z-index: 60; /* above other header elements */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
+
+/* Larger placement for wider screens (desktop/tablet) */
+@media (min-width: 769px) {
+  .back-btn {
+    top: 12px;
+    left: 18px;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+}
+
+/* Fine tune for very large desktop where header has more top padding */
+@media (min-width: 1024px) {
+  .back-btn {
+    top: 18px;
+    left: 24px;
+  }
+}
+
+/* Features Section */
+.features-section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.features-title {
+  font-size: 23px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.features-description {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Hidden class */
+.hidden {
+  display: none;
+}
+
+/* Small text styles */
+.small-text {
+  font-size: 12px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.basic-info-desc {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Address Section Styling */
+.address-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.address-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.city-zip-row {
+  display: flex;
+  gap: 10px;
+}
+
+.city-zip-row .input-wrapper {
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-title {
+    font-size: 24px;
+  }
+
+  .form-input,
+  select {
+    font-size: 16px;
+    padding: 12px 12px 12px 55px;
+  }
+
+  .date-inputs select {
+    padding: 12px 35px 12px 12px !important;
+    border-radius: 25px !important;
+  }
+
+  .date-inputs .form-input,
+  .date-inputs input[type="number"] {
+    padding: 12px !important;
+    border-radius: 25px !important;
+  }
+
+  .welcome-title {
+    font-size: 24px;
+  }
+
+  .auth-buttons {
+    margin-bottom: 30px;
+  }
+
+  .logo-image {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-container {
+    border-radius: 0;
+    max-width: 100%;
+    min-height: 100vh;
+  }
+
+  .auth-title {
+    font-size: 22px;
+  }
+
+  .welcome-title {
+    font-size: 22px;
+  }
+
+  .features-title {
+    font-size: 20px;
+  }
+
+  .features-description {
+    font-size: 14px;
+  }
+
+  .auth-container {
+    min-height: 100vh;
+  }
+
+  .date-inputs {
+    gap: 8px;
+  }
+
+  .logo-image {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 320px) {
+  .welcome-title {
+    font-size: 20px;
+  }
+
+  .auth-title {
+    font-size: 20px;
+  }
+
+  .features-title {
+    font-size: 18px;
+  }
+
+  .date-inputs {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .logo-image {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Animation for smooth transitions */
+.auth-container,
+.landing-container {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Desktop / web-only wider layout: make the "phone" container behave like a centered web panel */
+@media (min-width: 1024px) {
+  /* Keep original mobile-styled look but allow a slightly wider panel on desktop */
+  .phone-container {
+    max-width: 700px; /* slightly wider than mobile default (550px) */
+    width: 100%;
+    min-height: 600px;
+    border-radius: 25px; /* restore original rounding */
+  }
+
+  /* Keep default paddings but allow a touch more space on desktop */
+  .auth-container,
+  .landing-container {
+    padding: 24px 24px;
+  }
+
+  .logo-image {
+    width: 170px;
+    height: 170px;
+  }
+}
