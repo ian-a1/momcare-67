@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Home - MomCare App</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/mobile-touch.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  </head>
+  <body>
+    <div class="phone-container">
+      <!-- STATUS BAR (Placeholder) -->
+      <!-- <div class="status-bar">
+        <span></span>
+        <span></span>
+      </div> -->
+
+      <!-- Main content area that switches between tabs -->
+      <div id="main-content-area" style="flex: 1; overflow-y: auto;">
+          <!-- HOME TAB CONTENT -->
+          <div class="tab-content" id="tab-home">
+            <div class="header">
+              <div class="greeting">
+                Good Morning, <span id="userName">Loading...</span>!
+              </div>
+
+              <div class="pregnancy-info">
+                <div class="pregnancy-weeks">
+                  You're <span id="currentWeek">--</span> weeks pregnant
+                </div>
+
+                <div class="progress-section">
+                  <div class="progress-header">
+                    <span class="progress-label">Pregnancy Progress</span>
+                    <span class="progress-weeks" id="progressWeeks">Week --of -- 40</span>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="action-buttons">
+                <button
+                  class="action-btn add-appointment"
+                  id="addAppointmentBtn"
+                  aria-label="Add Appointment"
+                >
+                  <div class="icon">📅</div>
+                  <div class="text">Add Appointment</div>
+                </button>
+              </div>
+            </div>
+
+            <div class="content">
+              <div class="next-appointment">
+                <div class="appointment-header">
+                  <div>
+                    <div class="appointment-title">Next Appointment</div>
+                    <div class="appointment-type" id="nextAppointmentType">Loading...</div>
+                  </div>
+                </div>
+
+                <div class="appointment-details">
+                  <div class="appointment-datetime">
+                    <span class="date" id="nextAppointmentDate">Loading...</span>
+                    <span class="time" id="nextAppointmentDoctor">Loading...</span>
+                  </div>
+                </div>
+
+                <div class="appointment-actions">
+                  <button class="btn-small btn-reminder" id="setReminderBtn">
+                    Set Reminder
+                  </button>
+                  <button class="btn-small btn-reschedule" id="rescheduleBtn">
+                    Reschedule
+                  </button>
+                </div>
+              </div>
+
+              <div class="recent-milestones">
+                <div class="milestones-header">
+                  <span class="milestones-title">Milestones</span>
+                  <span class="view-all" data-type="milestones">View All</span>
+                </div>
+
+                <div id="milestonesList">
+                  <p class='no-data'>Loading milestones...</p>
+                </div>
+              </div>
+
+              <div class="appointments-section">
+                <div class="appointments-header">
+                  <span class="appointments-title">Appointments</span>
+                  <span class="view-all" data-type="appointments">View All</span>
+                </div>
+
+                <div id="appointmentsList">
+                  <!-- Appointments will be loaded here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EMERGENCY TAB CONTENT -->
+          <div class="tab-content" id="tab-emergency" style="display: none;">
+            <div class="emergency-header">
+              <h1 class="emergency-title">Emergency</h1>
+            </div>
+
+            <div class="content">
+              <div class="emergency-guide">
+                <h2>Emergency Guide</h2>
+                <ul class="guide-list">
+                  <li>Stay calm and assess the situation</li>
+                  <li>Call emergency services if needed</li>
+                  <li>Use SOS button to alert contacts</li>
+                  <li>Share your location immediately</li>
+                  <li>Keep your phone charged at all times</li>
+                </ul>
+              </div>
+
+              <div class="emergency-button-container">
+                <button class="emergency-button" id="sosButton">
+                  <div class="icon">🆘</div>
+                  <div>EMERGENCY<br />SOS</div>
+                </button>
+              </div>
+
+              <div class="sos-status" id="sosStatus" style="display: none;">
+                <strong>SOS Alert Sent!</strong><br />
+                Emergency contacts have been notified with your location.
+              </div>
+
+              <div class="emergency-contacts">
+                <h3>Emergency Contacts</h3>
+                <div id="emergencyContactsList">
+                  <!-- Emergency contacts will be loaded here -->
+                </div>
+                <div class="add-contact" id="addEmergencyContactBtn">
+                  <span style="margin-right: 8px">+</span> Add Emergency Contact
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- LIBRARY TAB CONTENT (NEW) -->
+        <div class="tab-content" id="tab-library" style="display: none;">
+            <div class="dark-header">
+                <h1 class="dark-header-title">Library</h1>
+            </div>
+            <div class="dark-search-container">
+                <div class="dark-search-wrapper">
+                    <i class="fas fa-search dark-search-icon"></i>
+                    <input type="text" class="dark-search-input" placeholder="Search recipes, exercises, mental health..." id="librarySearchInput" />
+                </div>
+            </div>
+            <div class="dark-category-tabs">
+                <button class="dark-category-tab active" data-category="all">All</button>
+                <button class="dark-category-tab" data-category="recipes">Recipes</button>
+                <button class="dark-category-tab" data-category="mental-health">Mental Health</button>
+                <button class="dark-category-tab" data-category="exercise">Exercise</button>
+                <button class="dark-category-tab" data-category="medicine-supplements">Medicine</button>
+            </div>
+            <div class="dark-content-area">
+                <div class="dark-section-header">
+                    <h2 class="dark-section-title">Browse Categories</h2>
+                    <span class="dark-view-all" data-type="library">View All</span>
+                </div>
+                <div id="library-content-area">
+                    <!-- Library items will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+         <!-- MOMCARE FORUM -->
+        <div class="tab-content" id="tab-chat" style="display: none;">
+            <div class="forum-container">
+                <div class="forum-header-new">
+                    <h1 class="forum-title-new">MomCare Forum</h1>
+                    <div class="forum-actions-new">
+                        <div class="search-container-new">
+                            <i class="fas fa-search search-icon-new"></i>
+                            <input type="text" id="searchBar" placeholder="Search posts..." class="search-input-new" />
+                        </div>
+                        <button class="create-post-btn-new" id="createPostBtn">Create Post</button>
+                    </div>
+                </div>
+
+                <div class="forum-body-new">
+                    <div class="trending-tags-new" id="trendingTags">
+                        <h2 class="tags-title-new">Trending Tags:</h2>
+                        <div class="tag-list-new">
+                            <!-- Tags will be loaded here by JS -->
+                        </div>
+                    </div>
+                    <div id="postsContainer">
+                        <!-- Forum posts will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+          <!-- PROFILE TAB CONTENT -->
+          <div class="tab-content" id="tab-profile" style="display: none;">
+            <div class="profile-header-title">My Profile</div>
+            <div class="profile-user-section">
+              <div class="profile-avatar">
+                <span class="avatar-letter" id="avatarLetter">?</span>
+                <div class="avatar-badge">✓</div>
+              </div>
+              <div class="profile-user-info">
+                <div class="profile-name" id="displayName">Loading...</div>
+                <div class="profile-status">Expecting Mom</div>
+              </div>
+            </div>
+            <div class="profile-menu">
+              <div class="profile-menu-item" data-section="basic-info">
+                <div class="profile-menu-icon">👤</div>
+                <div class="profile-menu-info">
+                  <div class="profile-menu-title">Basic Information</div>
+                  <div class="profile-menu-subtitle">Name, contact, pregnancy info</div>
+                </div>
+                <div class="profile-menu-arrow">❯</div>
+              </div>
+              <div class="profile-menu-item" data-section="medical-info">
+                <div class="profile-menu-icon">🏥</div>
+                <div class="profile-menu-info">
+                  <div class="profile-menu-title">Medical Information</div>
+                  <div class="profile-menu-subtitle">Allergies, conditions</div>
+                </div>
+                <div class="profile-menu-arrow">❯</div>
+              </div>
+                <div class="profile-menu-item" data-section="my-report">
+                  <div class="profile-menu-icon">📊</div>
+                  <div class="profile-menu-info">
+                    <div class="profile-menu-title">My Report</div>
+                    <div class="profile-menu-subtitle">View pregnancy statistics</div>
+                  </div>
+                  <div class="profile-menu-arrow">❯</div>
+                </div>
+              <div class="profile-menu-item" data-section="password-security">
+                <div class="profile-menu-icon">🔒</div>
+                <div class="profile-menu-info">
+                  <div class="profile-menu-title">Password & Security</div>
+                  <div class="profile-menu-subtitle">Change password, 2FA</div>
+                </div>
+                <div class="profile-menu-arrow">❯</div>
+              </div>
+              <div class="profile-menu-item" data-section="help-support">
+                <div class="profile-menu-icon">💡</div>
+                <div class="profile-menu-info">
+                  <div class="profile-menu-title">Help & Support</div>
+                  <div class="profile-menu-subtitle">Get help and find answers</div>
+                </div>
+                <div class="profile-menu-arrow">❯</div>
+              </div>
+              <div class="profile-menu-item" data-section="signOut">
+                <div class="profile-menu-icon">🚪</div>
+                <div class="profile-menu-info">
+                  <div class="profile-menu-title">Sign Out</div>
+                  <div class="profile-menu-subtitle">Log out of your account</div>
+                </div>
+                <div class="profile-menu-arrow">❯</div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <!-- BOTTOM NAVIGATION -->
+      <div class="bottom-nav">
+        <div class="nav-item active" data-tab="home">
+          <div class="nav-icon">🏠</div>
+          <span>Home</span>
+        </div>
+        <div class="nav-item" data-tab="emergency">
+          <div class="nav-icon">🚨</div>
+          <span>Emergency</span>
+        </div>
+        <div class="nav-item" data-tab="library">
+          <div class="nav-icon">📚</div>
+          <span>Library</span>
+        </div>
+        <div class="nav-item" data-tab="chat">
+          <div class="nav-icon">💬</div>
+          <span>Forum</span>
+        </div>
+        <div class="nav-item" data-tab="profile">
+          <div class="nav-icon">👤</div>
+          <span>Profile</span>
+        </div>
+      </div>
+
+      <!-- MODALS -->
+      <!-- SOS Alert Modal -->
+      <div class="modal-overlay" id="sosAlertModal">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #e74c3c;">
+                <h3>EMERGENCY ALERT</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="sosAlertBody" style="text-align: center; padding: 30px 20px;">
+                <!-- Content will be injected by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel">Close</button>
+            </div>
+        </div>
+      </div>
+      <!-- PDF Viewer Modal -->
+        <div class="modal-overlay" id="pdfViewerModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="pdfViewerTitle">PDF Viewer</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <iframe 
+  id="pdfFrame" 
+  type="application/pdf" 
+  style="width: 100%; height: 100%; border: none;">
+</iframe>
+                </div>
+            </div>
+        </div>
+      <!-- Forum Guidelines Modal -->
+      <div class="modal-overlay" id="forumGuidelinesModal">
+          <div class="modal-content-guidelines">
+              <div class="modal-header-guidelines">
+                  <h3>Community Guidelines</h3>
+                  <p><span id="onlineMothersCount">Loading...</span> million mothers online • Community • FAQ</p>
+              </div>
+              <div class="modal-body-guidelines">
+                  <ul class="guidelines-list">
+                      <li><span>💖</span> Be respectful and kind to all community members</li>
+                      <li><span>🤗</span> Share supportive and encouraging messages</li>
+                      <li><span>⚕️</span> Don't share any personal medical advice</li>
+                      <li><span>🚫</span> No inappropriate content or offensive language</li>
+                      <li><span>🔒</span> Respect privacy and confidentiality</li>
+                      <li><span>🌟</span> Help create a positive and supportive environment</li>
+                  </ul>
+              </div>
+              <div class="modal-footer-guidelines">
+                  <button class="btn-agree" id="agreeGuidelinesBtn">I Agree</button>
+                  <button class="btn-decline" id="declineGuidelinesBtn">Decline</button>
+              </div>
+          </div>
+      </div>
+
+      <!-- Generic Modal for View All -->
+      <div class="modal-overlay" id="viewAllModal">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h3 id="viewAllTitle">All Items</h3>
+                  <button class="modal-close">&times;</button>
+              </div>
+              <div class="milestone-tabs" id="milestoneTabs" style="display: none;">
+                  <button class="milestone-tab active" data-filter="pending">Pending</button>
+                  <button class="milestone-tab" data-filter="complete">Completed</button>
+              </div>
+              <div class="modal-body" id="viewAllBody" style="padding: 10px;">
+                  <!-- Content will be injected here -->
+              </div>
+               <div class="modal-footer">
+                  <button class="btn-cancel">Close</button>
+              </div>
+          </div>
+      </div>
+      
+      <!-- Confirmation Modal -->
+      <div class="modal-overlay" id="confirmModal">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h3>Confirmation</h3>
+              </div>
+              <div class="modal-body">
+                  <p id="confirmMessage">Are you sure?</p>
+              </div>
+               <div class="modal-footer">
+                  <button class="btn-cancel" id="confirmCancel">Cancel</button>
+                  <button class="btn-save" id="confirmOK">OK</button>
+              </div>
+          </div>
+      </div>
+
+      <!-- Add/Edit Appointment Modal -->
+      <div class="modal-overlay" id="appointmentModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="appointmentModalTitle">Add Appointment</h3>
+            <button class="modal-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="appointmentForm">
+              <input type="hidden" name="id">
+              <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="title" required>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea name="description"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Date & Time</label>
+                <input type="datetime-local" name="appointment_date" id="appointmentDate" required>
+              </div>
+              <div class="form-group">
+                <label>Doctor</label>
+                <!-- Single fixed doctor: Dr. Casallo -->
+                <div class="static-doctor">Dr. Casallo</div>
+                <div class="static-clinic">
+                  <div class="clinic-name">QualiCare Medical Clinic and Laboratory</div>
+                  <div class="clinic-address">470 Hippodromo, Sampaloc, Manila, 1008 Metro Manila</div>
+                </div>
+                <input type="hidden" name="doctor_id" value="1">
+                <input type="hidden" name="doctor_name" value="Dr. Casallo">
+              </div>
+              <div class="form-group">
+                <label>Type</label>
+                <select name="type">
+                  <option value="prenatal">Prenatal Checkup</option>
+                  <option value="ultrasound">Ultrasound</option>
+                  <option value="blood_test">Blood Test</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel">Cancel</button>
+            <button class="btn-save" id="saveAppointment">Save</button>
+          </div>
+        </div>
+      </div>
+        
+        <!-- Edit Next Appointment Modal (separate from Add) -->
+      <div class="modal-overlay" id="editAppointmentModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="editAppointmentModalTitle">Edit Appointment</h3>
+            <button class="modal-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="editAppointmentForm">
+              <input type="hidden" name="id">
+              <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="title" required>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea name="description"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Date & Time</label>
+                <input type="datetime-local" name="appointment_date" id="editAppointmentDate" required>
+              </div>
+              <div class="form-group">
+                <label>Doctor</label>
+                <!-- Single fixed doctor: Dr. Casallo -->
+                <div class="static-doctor">Dr. Casallo</div>
+                <div class="static-clinic">
+                  <div class="clinic-name">QualiCare Medical Clinic and Laboratory</div>
+                  <div class="clinic-address">470 Hippodromo, Sampaloc, Manila, 1008 Metro Manila</div>
+                </div>
+                <input type="hidden" name="doctor_id" value="1">
+                <input type="hidden" name="doctor_name" value="Dr. Casallo">
+              </div>
+              <div class="form-group">
+                <label>Type</label>
+                <select name="type">
+                  <option value="prenatal">Prenatal Checkup</option>
+                  <option value="ultrasound">Ultrasound</option>
+                  <option value="blood_test">Blood Test</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel">Cancel</button>
+            <button class="btn-save" id="saveEditAppointment">Save</button>
+          </div>
+        </div>
+      </div>
+        
+        <!-- Reminder Modal -->
+      <div class="modal-overlay" id="reminderModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Set Reminder</h3>
+            <button class="modal-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="reminderForm">
+              <input type="hidden" name="appointment_id">
+              <div class="form-group">
+                <label>Reminder time before appointment</label>
+                <select name="offset_minutes" id="offsetSelect">
+                  <option value="5">5 minutes before</option>
+                  <option value="15">15 minutes before</option>
+                  <option value="30">30 minutes before</option>
+                  <option value="60">1 hour before</option>
+                  <option value="120">2 hours before</option>
+                  <option value="custom">Custom...</option>
+                </select>
+              </div>
+              <div class="form-group" id="customOffsetGroup" style="display:none;">
+                <label>Custom minutes</label>
+                <input type="number" name="custom_minutes" min="1" placeholder="Minutes before" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel">Cancel</button>
+            <button class="btn-save" id="saveReminderBtn">Save</button>
+          </div>
+        </div>
+      </div>
+        
+
+
+
+      <!-- Add/Edit Emergency Contact Modal -->
+      <div class="modal-overlay" id="addContactModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="contactModalTitle">Add Emergency Contact</h3>
+            <button class="modal-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="emergencyContactForm">
+              <input type="hidden" name="id">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" required>
+              </div>
+              <div class="form-group">
+                <label>Relationship</label>
+                <input type="text" name="relationship">
+              </div>
+              <div class="form-group">
+                <label>Contact Type</label>
+                <select name="contact_type">
+                  <option value="mobile">Mobile</option>
+                  <option value="landline">Landline</option>
+                  <option value="emergency">Emergency</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="is_primary"> Primary Contact
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel">Cancel</button>
+            <button class="btn-save" id="saveContact">Save</button>
+          </div>
+        </div>
+      </div>
+
+       <!-- Create Post Modal -->
+      <div class="modal-overlay" id="createPostModal">
+          <div class="modal-content-forum">
+              <div class="modal-header">
+                  <h3>Create New Post</h3>
+                  <button class="modal-close">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <form id="createPostForm">
+                      <div class="form-group">
+                          <label>Title</label>
+                          <input type="text" name="title" required placeholder="Enter a descriptive title">
+                      </div>
+                      <div class="form-group">
+                          <label>Content</label>
+                          <textarea name="content" rows="6" required placeholder="Share your thoughts..."></textarea>
+                      </div>
+                      <div class="form-group">
+                          <label>Tags (comma-separated)</label>
+                          <input type="text" name="tags" placeholder="e.g., nutrition, first-trimester, advice">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn-cancel">Cancel</button>
+                  <button class="btn-save" id="savePostBtn">Post</button>
+              </div>
+          </div>
+      </div>
+
+      <!-- View Post Modal -->
+      <div class="modal-overlay" id="viewPostModal">
+          <div class="modal-content-forum">
+              <div class="modal-header">
+                  <h3 id="viewPostTitle">Post Details</h3>
+                  <button class="modal-close">&times;</button>
+              </div>
+              <div class="modal-body" id="viewPostContent" style="padding-bottom: 0;">
+                  <!-- Post and replies will be loaded here -->
+              </div>
+              <div class="modal-footer" style="display: block; padding-top: 15px;">
+                   <form id="replyForm">
+                      <div class="form-group">
+                          <textarea name="content" placeholder="Write a reply..." required rows="3"></textarea>
+                      </div>
+                      <button type="submit" class="btn-save" style="width: 100%;">Add Reply</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      
+    <!-- Report Post Modal -->
+    <div class="modal-overlay" id="reportModal">
+      <div class="modal-content-report">
+        <div class="modal-header">
+          <h3>Report User</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body" style="padding: 10px 20px;">
+          <p style="color:#5a5a5a;">Help us keep our community safe by reporting inappropriate behavior.</p>
+          <form id="reportForm">
+            <input type="hidden" name="post_id" id="report_post_id">
+            <input type="hidden" name="reply_id" id="report_reply_id">
+            <div class="report-option">
+              <label><input type="radio" name="reason" value="inappropriate_messages"> Inappropriate messages or harassment</label>
+            </div>
+            <div class="report-option">
+              <label><input type="radio" name="reason" value="spam"> Spam or fake profile</label>
+            </div>
+            <div class="report-option">
+              <label><input type="radio" name="reason" value="inappropriate_photos"> Inappropriate photos or content</label>
+            </div>
+            <div class="report-option">
+              <label><input type="radio" name="reason" value="pretending"> Pretending to be someone else</label>
+            </div>
+            <div class="report-option">
+              <label><input type="radio" name="reason" value="other"> Other safety concerns</label>
+            </div>
+            <div style="margin-top:12px;">
+            <textarea name="details" id="report_details" placeholder="Optional details (what happened)" style="width:100%; min-height:80px; border-radius:8px; border:1px solid #eee; padding:8px;"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" id="reportCancelBtn">Cancel</button>
+          <button class="btn-save" id="reportSubmitBtn">Submit Report</button>
+        </div>
+      </div>
+    </div>
+        
+      <!-- PROFILE PAGE MODALS -->
+      <div class="modal-overlay profile-modal" id="basicInfoModal">
+          <div class="profile-page-content">
+              <div class="profile-page-header">
+                  <button class="profile-back-btn modal-close" aria-label="Go back">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                          <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                  </button>
+                  <h3 class="profile-page-title">Basic Information</h3>
+                  <button class="profile-edit-btn">Edit</button>
+              </div>
+              <div class="profile-page-body" style="position: relative; overflow-y: auto; max-height: calc(100vh - 200px);">
+                  <form id="basicInfoForm">
+                      <div class="profile-form-group">
+                          <label>Full Name</label>
+                          <input type="text" name="name" placeholder="Enter your full name" readonly required>
+                      </div>
+                      <div class="profile-form-group">
+                          <label>Email</label>
+                          <input type="email" name="email" placeholder="Enter your email" readonly required>
+                      </div>
+                      <div class="profile-form-group">
+                          <label>Phone Number</label>
+                          <input type="tel" name="phone_number" placeholder="e.g., +639171234567" readonly>
+                      </div>
+                      <div class="profile-form-group">
+                          <label>Date of Birth</label>
+                          <input type="date" name="birthdate" readonly>
+                      </div>
+                      <hr class="profile-divider">
+                      
+                      <div class="profile-form-group">
+                          <label>Estimated Due Date</label>
+                          <input type="date" name="due_date" readonly>
+                      </div>
+                      <div class="due-date-help-link">
+                          <a href="#" onclick="showLmpOverlay(); return false;" class="help-link-text">
+                              <i class="fas fa-question-circle"></i>
+                              Don't know your due date? Learn more
+                          </a>
+                      </div>
+
+                      <hr class="profile-divider">
+                      <div class="profile-form-group">
+                          <label>Address Line 1</label>
+                          <input type="text" name="address_line1" placeholder="House No., Street Name" readonly>
+                      </div>
+                      <div class="profile-form-group">
+                          <label>Address Line 2 (Optional)</label>
+                          <input type="text" name="address_line2" placeholder="Apartment, suite, etc." readonly>
+                      </div>
+                      <div class="profile-form-group">
+                          <label>Barangay</label>
+                          <input type="text" name="barangay" placeholder="Enter your barangay" readonly>
+                      </div>
+                      <div class="profile-form-group-split">
+                          <div class="profile-form-group">
+                              <label>City</label>
+                              <input type="text" name="city" placeholder="Enter your city" readonly>
+                          </div>
+                          <div class="profile-form-group">
+                              <label>ZIP Code</label>
+                              <input type="text" name="zip_code" placeholder="Enter ZIP code" readonly>
+                          </div>
+                      </div>
+                  </form>
+                  
+                  <!-- LMP Overlay -->
+                  <div id="lmpOverlay" class="overlay-content">
+                      <iframe id="lmpFrame" src="./lmp/lmp.html"></iframe>
+                  </div>
+              </div>
+              
+              <div class="profile-page-footer">
+                  <button class="profile-save-btn" data-section="basic-info">Save Changes</button>
+              </div>
+          </div>
+      </div>
+
+      <div class="modal-overlay profile-modal" id="medicalInfoModal">
+        <div class="profile-page-content">
+            <div class="profile-page-header">
+        <button class="profile-back-btn modal-close" aria-label="Go back">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+                <h3 class="profile-page-title">Medical Information</h3>
+                <button class="profile-edit-btn">Edit</button>
+            </div>
+            <div class="profile-page-body">
+                <form id="medicalInfoForm">
+                    <div class="profile-form-group">
+                        <label>Healthcare Provider / Hospital</label>
+                        <input type="text" name="healthcare_provider" placeholder="e.g., St. Luke's Medical Center" readonly>
+                    </div>
+                    <div class="profile-form-group">
+                        <label>Primary OB/GYN Name</label>
+                        <input type="text" name="primary_obgyn_name" placeholder="e.g., Dr. Josefina Santos" readonly>
+                    </div>
+                    <div class="profile-form-group">
+                        <label>Clinic Address</label>
+                        <input type="text" name="clinic_address" placeholder="Enter clinic address" readonly>
+                    </div>
+                      <div class="profile-form-group">
+                        <label>Clinic Phone Number</label>
+                        <input type="tel" name="clinic_phone_number" placeholder="e.g., (02) 8123-4567" readonly>
+                    </div>
+                    <hr class="profile-divider">
+                    <div class="profile-form-group">
+                          <label>Allergies</label>
+                        <div class="allergy-input-group">
+                            <input type="text" id="newAllergyInput" placeholder="Enter allergy and press Add" readonly>
+                            <button type="button" class="profile-add-btn" disabled>Add</button>
+                        </div>
+                        <div id="allergiesList"></div>
+                    </div>
+                    <div class="profile-form-group">
+                        <label>Pre-existing Medical Conditions</label>
+                        <textarea name="medical_conditions" rows="4" placeholder="List any conditions like hypertension, diabetes, etc." readonly></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="profile-page-footer">
+                <button class="profile-save-btn" data-section="medical-info">Save Changes</button>
+            </div>
+        </div>
+      </div>
+      
+      <div class="modal-overlay profile-modal" id="passwordSecurityModal">
+        <div class="profile-page-content">
+            <div class="profile-page-header">
+        <button class="profile-back-btn modal-close" aria-label="Go back">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+                <h3 class="profile-page-title">Password & Security</h3>
+                <button class="profile-edit-btn">Edit</button>
+            </div>
+            <div class="profile-page-body">
+                <form id="passwordSecurityForm">
+                      <div class="profile-form-group">
+                        <label>Change Password</label>
+                        <input type="password" name="current_password" placeholder="Current Password" readonly>
+                    </div>
+                    <div class="profile-form-group">
+                        <input type="password" name="new_password" placeholder="New Password" readonly>
+                    </div>
+                    <div class="profile-form-group">
+                        <input type="password" name="confirm_password" placeholder="Confirm New Password" readonly>
+                    </div>
+                    <hr class="profile-divider">
+                      <div class="profile-form-group">
+                          <label>Security</label>
+                          <label class="checkbox-label">
+                            <input type="checkbox" name="two_factor_auth" disabled> Enable Two-Factor Authentication
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="profile-page-footer">
+                <button class="profile-save-btn" data-section="password-security">Save Changes</button>
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-overlay profile-modal" id="helpSupportModal">
+          <div class="profile-page-content light-theme">
+            <div class="profile-page-header">
+        <button class="profile-back-btn modal-close pink" aria-label="Go back">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+                <h3 class="profile-page-title">Help & Support</h3>
+                <div style="width: 45px;"></div> <!-- Spacer -->
+            </div>
+            <div class="profile-page-body">
+                <h4><i class="fas fa-question-circle header-icon"></i> Get Help Now</h4>
+                <div class="help-cards-container">
+                    <div class="help-card" onclick="window.open('sms:+639205221404', '_blank')" style="cursor: pointer;">
+                        <div class="help-card-icon" style="background-color: #e0f3ff; color: #007bff;">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <p>Chat</p>
+                        <small>Message Us</small>
+                    </div>
+                      <div class="help-card" onclick="window.open('tel:+639205221404', '_blank')" style="cursor: pointer;">
+                        <div class="help-card-icon" style="background-color: #dfffee; color: #28a745;">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <p>Call Us</p>
+                        <small>Support line</small>
+                    </div>
+                      <div class="help-card" onclick="window.open('mailto:momcareguide@gmail.com', '_blank')" style="cursor: pointer;">
+                        <div class="help-card-icon" style="background-color: #fff8e1; color: #ffc107;">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p>Email</p>
+                        <small>Detailed support</small>
+                    </div>
+                      <div class="help-card">
+                        <div class="help-card-icon" style="background-color: #f3e5f5; color: #9c27b0;">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <p>FAQ</p>
+                        <small>Quick answers</small>
+                    </div>
+                </div>
+                
+                <h4 style="margin-top: 30px;"><i class="fas fa-book-medical header-icon"></i> Health & Wellness</h4>
+                <div class="help-links-container">
+                    <a href="#" class="help-link">
+                        <div>
+                            <p>Medical Guidelines</p>
+                            <small>Understanding app limitations & advice</small>
+                        </div>
+                        <span>❯</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+      </div>
+
+        <!-- Report Generation Modal -->
+        <div class="modal-overlay profile-modal" id="myReportModal">
+          <div class="profile-page-content">
+            <!-- Mobile-optimized header -->
+            <div class="profile-page-header">
+        <button class="profile-back-btn modal-close pink" aria-label="Go back">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+              <h3 class="profile-page-title">📊 My Report</h3>
+              <div style="display: flex; gap: 8px;">
+                <button class="profile-print-btn" id="downloadReportBtn" aria-label="Download report">📥</button>
+              </div>
+            </div>
+
+            <!-- Scrollable content area optimized for mobile -->
+            <div class="profile-page-body" id="reportPageBody" style="padding: 15px;">
+              <!-- Loading State -->
+              <div id="report-loading" class="report-loading-state">
+                <div class="loading-spinner"></div>
+                <p>Generating your report...</p>
+              </div>
+
+              <!-- Report Content (Hidden until loaded) -->
+              <div id="report-content" style="display: none;">
+
+                <!-- Pregnancy Progress Card -->
+                <div class="report-card">
+                  <div class="report-card-header">
+                    <h4>🤰 Pregnancy Progress</h4>
+                  </div>
+                  <div class="report-card-body">
+                    <div class="pregnancy-week-display">
+                      <div class="week-number-large">
+                        Week <span id="report-current-week">--</span> of <span id="report-total-weeks">40</span>
+                      </div>
+                      <div class="trimester-badge-report" id="report-trimester">Loading...</div>
+                    </div>
+
+                    <div class="progress-bar-wrapper">
+                      <div class="progress-bar-report">
+                        <div class="progress-fill-report" id="report-progress-fill" style="width: 0%"></div>
+                      </div>
+                      <div class="progress-percent-report" id="report-progress-percent">0%</div>
+                    </div>
+
+                    <div class="stats-grid-report">
+                      <div class="stat-box-report">
+                        <div class="stat-icon-report">📅</div>
+                        <div class="stat-content-report">
+                          <span class="stat-value-report" id="report-days-pregnant">0</span>
+                          <span class="stat-label-report">Days Pregnant</span>
+                        </div>
+                      </div>
+                      <div class="stat-box-report">
+                        <div class="stat-icon-report">⏰</div>
+                        <div class="stat-content-report">
+                          <span class="stat-value-report" id="report-days-remaining">0</span>
+                          <span class="stat-label-report">Days Remaining</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="due-date-display-report">
+                      <strong>Estimated Due Date:</strong> 
+                      <span id="report-due-date">Not set</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Milestones Card -->
+                <div class="report-card">
+                  <div class="report-card-header">
+                    <h4>🎯 Milestones Tracker</h4>
+                  </div>
+                  <div class="report-card-body">
+                    <div class="milestone-summary-grid">
+                      <div class="summary-box-report completed">
+                        <span class="summary-number-report" id="report-milestones-completed">0</span>
+                        <span class="summary-label-report">Completed</span>
+                      </div>
+                      <div class="summary-box-report pending">
+                        <span class="summary-number-report" id="report-milestones-pending">0</span>
+                        <span class="summary-label-report">Pending</span>
+                      </div>
+                      <div class="summary-box-report total">
+                        <span class="summary-number-report" id="report-milestones-total">0</span>
+                        <span class="summary-label-report">Total</span>
+                      </div>
+                    </div>
+
+                    <div class="completion-bar-wrapper">
+                      <div class="completion-label-report">
+                        <span>Completion Rate</span>
+                        <span class="completion-rate-report" id="report-milestone-rate">0%</span>
+                      </div>
+                      <div class="completion-bar-report">
+                        <div class="completion-fill-report" id="report-milestone-fill" style="width: 0%"></div>
+                      </div>
+                    </div>
+
+                    <div class="latest-achievement-report">
+                      <div class="achievement-icon-report">🌟</div>
+                      <div class="achievement-content-report">
+                        <span class="achievement-title-report">Latest Achievement</span>
+                        <span class="achievement-name-report" id="latest-milestone-name">No milestones yet</span>
+                        <span class="achievement-date-report" id="latest-milestone-date"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Appointments Card -->
+                <div class="report-card">
+                  <div class="report-card-header">
+                    <h4>📅 Appointments Overview</h4>
+                  </div>
+                  <div class="report-card-body">
+                    <div class="appointment-stats-report">
+                      <div class="appt-stat-row-report">
+                        <span class="appt-stat-label-report">⏳ Pending</span>
+                        <div class="appt-stat-bar-report">
+                          <div class="appt-stat-fill-report pending" id="report-appt-pending-bar" style="width: 0%"></div>
+                        </div>
+                        <span class="appt-stat-value-report" id="report-appt-pending">0</span>
+                      </div>
+                      <div class="appt-stat-row-report">
+                        <span class="appt-stat-label-report">📍 Approved</span>
+                        <div class="appt-stat-bar-report">
+                          <div class="appt-stat-fill-report approved" id="report-appt-approved-bar" style="width: 0%"></div>
+                        </div>
+                        <span class="appt-stat-value-report" id="report-appt-approved">0</span>
+                      </div>
+                      <div class="appt-stat-row-report">
+                        <span class="appt-stat-label-report">✅ Completed</span>
+                        <div class="appt-stat-bar-report">
+                          <div class="appt-stat-fill-report completed" id="report-appt-completed-bar" style="width: 0%"></div>
+                        </div>
+                        <span class="appt-stat-value-report" id="report-appt-completed">0</span>
+                      </div>
+                      <div class="appt-stat-row-report">
+                        <span class="appt-stat-label-report">❌ Cancelled</span>
+                        <div class="appt-stat-bar-report">
+                          <div class="appt-stat-fill-report cancelled" id="report-appt-cancelled-bar" style="width: 0%"></div>
+                        </div>
+                        <span class="appt-stat-value-report" id="report-appt-cancelled">0</span>
+                      </div>
+                    </div>
+
+                    <div class="next-appointment-report" id="next-appointment-report-container">
+                      <div class="next-appt-header-report">Next Appointment</div>
+                      <div class="next-appt-content-report">
+                        <div class="next-appt-icon-report">📌</div>
+                        <div class="next-appt-details-report">
+                          <div class="next-appt-title-report" id="next-appt-title">No upcoming appointments</div>
+                          <div class="next-appt-date-report" id="next-appt-date"></div>
+                          <div class="next-appt-doctor-report" id="next-appt-doctor"></div>
+                        </div>
+                      </div>
+                      <div class="next-appt-action-report" id="next-appt-action" style="display: none;">
+                        <button class="btn-cancel-appointment-report" id="btn-cancel-next-appt" onclick="window.app.cancelAppointmentFromReport()">Cancel Appointment</button>
+                      </div>
+                    </div>
+
+                    <div class="attendance-rate-report">
+                      <span>Attendance Rate:</span>
+                      <span class="rate-value-report" id="report-appt-rate">0%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- This Week Summary Card -->
+                <div class="report-card">
+                  <div class="report-card-header">
+                    <h4>📊 This Week Summary</h4>
+                  </div>
+                  <div class="report-card-body">
+                    <div class="week-summary-report">
+                      <div class="week-summary-item-report">
+                        <div class="summary-icon-report">🎯</div>
+                        <div class="summary-text-report">
+                          <strong id="report-week-milestones">0</strong> Milestones Completed
+                        </div>
+                      </div>
+                      <div class="week-summary-item-report">
+                        <div class="summary-icon-report">📅</div>
+                        <div class="summary-text-report">
+                          <strong id="report-week-appointments">0</strong> Appointments This Week
+                        </div>
+                      </div>
+                      <div class="week-summary-item-report">
+                        <div class="summary-icon-report">💪</div>
+                        <div class="summary-text-report" id="report-encouragement">
+                          Keep up the great work!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script src="js/mobile-touch.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
+

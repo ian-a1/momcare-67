@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Landing - MomCare</title>
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <link rel="stylesheet" href="css/landing.css" />
+    <link rel="stylesheet" href="css/mobile-touch.css" />
+    <style>
+        /* Admin icon for quick access to admin login */
+        .auth-container { position: relative; }
+        .admin-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+        .admin-icon:hover { background: rgba(0,0,0,0.06); }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <div id="landingPage" class="landing-container">
+            <div class="landing-header">
+                <div class="app-logo">
+                    <div class="logo-icon">
+                        <img src="images/logo.png" alt="MomCare Logo" class="logo-image" />
+                    </div>
+                    <h1 class="app-title">MOMCARE</h1>
+                    <p class="app-subtitle">Your trusted pregnancy companion</p>
+                </div>
+            </div>
+
+            <div class="landing-content">
+                <div class="welcome-section">
+                    <h2 class="welcome-title">Welcome</h2>
+                    <p class="welcome-text">Ready to start your journey?</p>
+                </div>
+
+                <div class="auth-buttons">
+                    <button class="auth-btn primary" id="signUpBtn">Sign Up</button>
+                    <button class="auth-btn secondary" id="logInBtn">Log In</button>
+                </div>
+
+                <div class="features-section">
+                    <h3 class="features-title">Your Pregnancy Journey</h3>
+                    <p class="features-description">
+                        Track your health, monitor baby's growth, get expert guidance, and stay connected with healthcare professionals throughout your pregnancy.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="loginPage" class="auth-container hidden">
+            <a href="admin.php" class="admin-icon" title="Admin login" aria-label="Admin login">🔐</a>
+            <button class="back-btn" id="loginBackBtn">←</button>
+            <div class="auth-header">
+                <h1 class="auth-title">Login</h1>
+                <p class="auth-subtitle">Sign in to continue</p>
+            </div>
+             
+            <div class="auth-content">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <div class="input-icon"></div>
+                            <input type="email" id="loginEmail" name="email" class="form-input" placeholder="Email Address" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <div class="input-icon"></div>
+                            <input type="password" id="loginPassword" name="password" class="form-input" placeholder="Password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">👁</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-btn primary">LOGIN</button>
+                </form>
+
+                <a href="#" class="form-link" id="goToSignUp">Don't have an account? Sign up</a>
+            </div>
+        </div>
+
+        <div id="signUpPage" class="auth-container hidden">
+            <button class="back-btn" id="signUpBackBtn">←</button>
+            <div class="auth-header">
+                <h1 class="auth-title">Create your MomCare Account</h1>
+            </div>
+             
+            <div class="auth-content">
+                <form id="signUpForm">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <div class="input-icon"></div>
+                            <input type="text" name="name" class="form-input" placeholder="Full Name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <div class="input-icon"></div>
+                            <input type="email" name="email" class="form-input" placeholder="Email Address" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Basic Information</label>
+                        <p class="basic-info-desc">Enter your birthday and gender</p>
+                        
+                        <div class="date-inputs">
+                            <div class="input-wrapper">
+                                <select id="dobMonth" required>
+                                    <option value="">Month</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="number" id="dobDay" min="1" max="31" placeholder="Day" required>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="number" id="dobYear" min="1900" max="2024" placeholder="Year" required>
+                            </div>
+                            <input type="hidden" name="birthdate" id="birthdate">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <select name="sex" required>
+                                <option value="">Select Gender</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group address-section">
+                        <label class="form-label address-title">Address</label>
+                        
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <div class="input-icon"></div>
+                                <input type="text" name="address_line1" class="form-input" placeholder="Address Line 1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <div class="input-icon"></div>
+                                <input type="text" name="address_line2" class="form-input" placeholder="Address Line 2">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <div class="input-icon"></div>
+                                <input type="text" name="barangay" class="form-input" placeholder="Barangay" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group city-zip-row">
+                            <div class="input-wrapper">
+                                <div class="input-icon"></div>
+                                <input type="text" name="city" class="form-input" placeholder="City" required>
+                            </div>
+                            <div class="input-wrapper">
+                                <div class="input-icon"></div>
+                                <input type="text" name="zip_code" class="form-input" placeholder="ZIP Code" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <div class="input-icon"></div>
+                            <input type="password" name="password" class="form-input" placeholder="Password" id="password1" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('password1')">👁</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <div class="input-icon"></div>
+                           <input type="password" class="form-input" placeholder="Confirm Password" id="password2" required>
+                           <button type="button" class="password-toggle" onclick="togglePassword('password2')">👁</button>
+                        </div>
+                    </div>
+
+                    <p class="small-text">Use 8 or more characters with a mix of letters, numbers & symbols</p>
+
+                    <button type="submit" class="form-btn primary">CREATE ACCOUNT</button>
+                </form>
+
+                <a href="#" class="form-link" id="goToLogin">Already have an account? Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/mobile-touch.js"></script>
+    <script src="js/landing.js"></script>
+    <script>
+        // If the page was opened with #login, trigger the login view
+        if (window.location.hash === '#login') {
+            setTimeout(() => {
+                const btn = document.getElementById('logInBtn');
+                if (btn && typeof btn.click === 'function') btn.click();
+            }, 50);
+        }
+    </script>
+</body>
+</html>
